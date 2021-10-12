@@ -47,11 +47,11 @@ class AddFragment : Fragment() {
         val firstNAme = edtFirstName.text.toString()
         val lastName = edtLastName.text.toString()
         val age = edtAge.text.toString()
-        val idadeConvertidade = Integer.parseInt(age)
+        val idadeConvertida = Integer.parseInt(age)
 
         if (inputCheck(firstNAme, lastName, age)) {
             //Create user
-            val user = User(0, firstNAme, lastName, idadeConvertidade)
+            val user = User(0, firstNAme, lastName, idadeConvertida)
             //Add data do database
             mUserViewModel.addUser(user)
             Toast.makeText(context, "Usuario criado com sucesso", Toast.LENGTH_SHORT).show()

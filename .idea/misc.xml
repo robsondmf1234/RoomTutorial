@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/layout/fragment_update.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/delete_menu.xml" value="0.25" />
       </map>
     </option>
   </component>
