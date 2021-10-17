@@ -1,6 +1,7 @@
 package com.example.roomtutorial2.fragments.add
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -46,12 +47,12 @@ class AddFragment : Fragment() {
     private fun insertToDatabase() {
         val firstNAme = edtFirstName.text.toString()
         val lastName = edtLastName.text.toString()
-        val age = edtAge.text.toString()
-        val idadeConvertida = Integer.parseInt(age)
+        val age = edtAge.text
+//        val idadeConvertida:Int = age
 
-        if (inputCheck(firstNAme, lastName, age)) {
+        if (inputCheckFirstName(firstNAme) && inputCheckLastName(lastName) && inputCheckAge(age)) {
             //Create user
-            val user = User(0, firstNAme, lastName, idadeConvertida)
+            val user = User(0, firstNAme, lastName, Integer.parseInt(age.toString()))
             //Add data do database
             mUserViewModel.addUser(user)
             Toast.makeText(context, "Usuario criado com sucesso", Toast.LENGTH_SHORT).show()
@@ -62,15 +63,15 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(firstName: String, lasttName: String, age: String): Boolean {
-        return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lasttName) && TextUtils.isEmpty(
-            age
-        ))
+    private fun inputCheckFirstName(firstName: String): Boolean {
+        return !(TextUtils.isEmpty(firstName))
     }
-/*
-    private fun inputCheck(firstName: String, lasttName: String, age: Editable): Boolean {
-        return (TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lasttName) && age.isEmpty())
-    }
-*/
 
+    private fun inputCheckLastName(lastName: String): Boolean {
+        return !(TextUtils.isEmpty(lastName))
+    }
+
+    private fun inputCheckAge(age: Editable): Boolean {
+        return !(age.isEmpty())
+    }
 }

@@ -2,6 +2,7 @@ package com.example.roomtutorial2.fragments.update
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import android.view.*
 import android.widget.Button
@@ -49,13 +50,18 @@ class UpdateFragment : Fragment() {
     private fun updateItem() {
         val firstName = updateFirstName.text.toString()
         val lastName = updateLastName.text.toString()
-        val age = updateAge.text.toString()
-        val idadeConvertidada = Integer.parseInt(age)
+        val age = updateAge.text
 
 
-        if (inputCheck(firstName, lastName, age)) {
+        if (inputCheckFirstName(firstName) && inputCheckLastName(lastName) && inputCheckAge(age)) {
             //Create object User
-            val updateUser = User(args.currentUser.id, firstName, lastName, idadeConvertidada)
+            val updateUser =
+                User(
+                    args.currentUser.id,
+                    firstName,
+                    lastName,
+                    Integer.parseInt(age.toString())
+                )
             mUserViewModel.updateUser(updateUser)
             //Message
             Toast.makeText(requireContext(), "User updated with sucess", Toast.LENGTH_SHORT).show()
@@ -67,11 +73,18 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(firstName: String, lasttName: String, age: String): Boolean {
-        return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lasttName) && TextUtils.isEmpty(
-            age
-        ))
+    private fun inputCheckFirstName(firstName: String): Boolean {
+        return !(TextUtils.isEmpty(firstName))
     }
+
+    private fun inputCheckLastName(lastName: String): Boolean {
+        return !(TextUtils.isEmpty(lastName))
+    }
+
+    private fun inputCheckAge(age: Editable): Boolean {
+        return !(age.isEmpty())
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.delete_menu, menu)
