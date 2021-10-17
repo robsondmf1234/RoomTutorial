@@ -12,31 +12,31 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.roomtutorial2.R
+import com.example.roomtutorial2.databinding.FragmentUpdateBinding
 import com.example.roomtutorial2.model.User
 import com.example.roomtutorial2.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_update.*
-import kotlinx.android.synthetic.main.fragment_update.view.*
 
 class UpdateFragment : Fragment() {
 
     private val args by navArgs<UpdateFragmentArgs>()
-    lateinit var button: Button
-    lateinit var mUserViewModel: UserViewModel
+    private lateinit var button: Button
+    private lateinit var mUserViewModel: UserViewModel
+    private lateinit var binding: FragmentUpdateBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_update, container, false)
+    ): View {
+        binding = FragmentUpdateBinding.inflate(layoutInflater)
 
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-        view.updateFirstName.setText(args.currentUser.firstName)
-        view.updateLastName.setText(args.currentUser.lastName)
-        view.updateAge.setText(args.currentUser.age.toString())
+        binding.updateFirstName.setText(args.currentUser.firstName)
+        binding.updateLastName.setText(args.currentUser.lastName)
+        binding.updateAge.setText(args.currentUser.age.toString())
 
-        button = view.findViewById<Button>(R.id.updateButton)
+        button = binding.updateButton
         button.setOnClickListener {
             updateItem()
         }
@@ -44,7 +44,7 @@ class UpdateFragment : Fragment() {
         //Add Menu
         setHasOptionsMenu(true)
 
-        return view
+        return binding.root
     }
 
     private fun updateItem() {
@@ -82,7 +82,7 @@ class UpdateFragment : Fragment() {
     }
 
     private fun inputCheckAge(age: Editable): Boolean {
-        return !(age.isEmpty())
+        return age.isNotEmpty()
     }
 
 

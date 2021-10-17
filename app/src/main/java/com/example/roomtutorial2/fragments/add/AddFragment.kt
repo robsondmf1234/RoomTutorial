@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.roomtutorial2.R
+import com.example.roomtutorial2.databinding.FragmentAddBinding
 import com.example.roomtutorial2.model.User
 import com.example.roomtutorial2.viewmodel.UserViewModel
 
@@ -23,32 +24,32 @@ class AddFragment : Fragment() {
     lateinit var edtLastName: EditText
     lateinit var edtAge: EditText
     lateinit var button: Button
+    lateinit var binding: FragmentAddBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add, container, false)
+        binding = FragmentAddBinding.inflate(layoutInflater)
 
-        edtFirstName = view.findViewById<EditText>(R.id.edtFistName)
-        edtLastName = view.findViewById<EditText>(R.id.edtlastName)
-        edtAge = view.findViewById<EditText>(R.id.edtAge)
-        button = view.findViewById<Button>(R.id.button)
+        edtFirstName = binding.edtFistName
+        edtLastName = binding.edtlastName
+        edtAge = binding.edtAge
+        button = binding.button
+
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-        button.setOnClickListener {
+        binding.button.setOnClickListener {
             insertToDatabase()
         }
 
-        return view
+        return binding.root
     }
 
     private fun insertToDatabase() {
         val firstNAme = edtFirstName.text.toString()
         val lastName = edtLastName.text.toString()
         val age = edtAge.text
-//        val idadeConvertida:Int = age
 
         if (inputCheckFirstName(firstNAme) && inputCheckLastName(lastName) && inputCheckAge(age)) {
             //Create user
