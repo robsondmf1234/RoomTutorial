@@ -1,2 +1,2 @@
 # RoomTutorial
-App de exemplo banco de dados usando o Room
+Projeto para consolidar conhecimento com banco de dados usando o Room
